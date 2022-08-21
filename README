@@ -1,0 +1,78 @@
+SUDOKU
+
+Submitted files:
+The following is a list of the provided files and folders, their names and a brief description of their function.
+
+boards (a folder containing various txt files of collections of sudoku boards of varying size and difficulty)
+sudoku.py (runs the sudoku game and parses user input from the command line.)
+board.py (a board class for the construction and manipulation of sudoku boards.)
+file_parser.py (reads the txt files in which boards must be input to the program.)
+backtracking_agent.py (a naive backtracking agent.)
+csp_agent.py (a backtracking agent which uses heuristics.)
+simuluated_annealing_agent.py (a simulated annealing agent)
+stochastic_beam_search.py (stochastic beam search)
+
+
+Instructions:
+
+Acceptable Input:
+The program accepts boards presented as a .txt file. Inside this file separate boards should be separated
+by a new line. and one board should be represented with each number of the row separated by spaces.
+There are a variety of files which are provided so that tests can be run on the program.
+
+Instructions:
+The user can provide instructions to the program via the command line. At the very least the user must provide a txt
+file with sudoku boards in the accepted format and the dimensions of the board. Otherwise the program will not work. The
+default agent is backtracking with heuristics, what we have called the csp agent.
+You can run the program using the command:
+python3 sudoku.py --games_file <name of text file> --board_size <an integer> --agent <agents name> --num_of_boards <how many boards
+should be solved>
+
+games file: (Required!!)
+In order to run to have the program solve a sudoku board it must be provided in the specified format. We have provided
+txt files of boards of varying size and difficulty. They are included, in a folder called boards,
+and the path to each, in order to use them in the program is listed below. They need only be provided to the program
+with the token --games_file and the program will run. Each name contains the size of the board and its difficulty level.
+
+boards/sudoku_9x9_easy.txt (contains 60 boards)
+boards/sudoku_9x9_medium.txt (contains 60 boards)
+boards/sudoku_9x9_difficult.txt (contains 60 boards)
+boards/sudoku_9x9_extreme.txt (contains 30 boards)
+boards/sudoku_16x16_easy.txt (contains 24 boards)
+boards/sudoku_16x16_medium.txt (contains 23 boards)
+boards/sudoku_25x25_easy.txt (contains 12 boards)
+boards/sudoku_25x25.txt (contains 1 board)
+
+Warning!! Boards of sizes larger than 9x9 take a very long time to run when using backtracking, without heuristics. 16x6
+boards will take, on average, 6-7 minutes and the 25x25 boards could take hours, possibly days to finish, if there are
+no heuristics used. More details on runtimes are provided in the included report.
+
+board size: (Required!!)
+Only one number is required. IE if the board is 9x9 the user should input 9. More numbers will result in an error. The
+size provided must be an integer whose square root is also an integer as in 4,9,25, etc. The program will not
+run on boards whose dimensions do not meet this criteria.
+
+num of boards:
+The user provides a file of sudoku boards. The program will by default run all the boards in the provided file.
+However, in the interests of time, we may not want to run the program on the entire file, so here the user can indicate
+how many of the boards in the file he would like to run on. Exceeding the bounds of the number of files provided will
+result in an error.
+
+agent:
+There are four different agents. Each is chosen by the user with one of the following names. (Details on each and
+further commands available are provided below.) The information is provided in the following format
+name - description. The user need only copy the name to the flag --agent in order to use it
+
+BacktrackingAgent - This agent runs a backtracking algorithm with no heuristics.
+CspAgent - This agent runs a backtracking algorithm with MRV and LCV as heuristics.
+SA_Agent - This agent runs a simulated annealing agent. The User can also choose the initial temperature and decay rate.
+SBS_Agent - This is a stochastic beam agent (long run times!)
+
+SA_Agent:
+The user is permitted to change the initial temperature and decay rate. In order to do so the following flags must be
+introduced after naming the simulated annealing agent. If these flags are not explicitly provided the agent will
+default to an initial temperature of 10000 and a decay rate of 0.9. The following syntax can be used.
+
+--temp <integer greater than 1> --decay <a float between 0 and 1>
+
+
